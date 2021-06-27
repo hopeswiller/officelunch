@@ -1,0 +1,69 @@
+{% extends 'baseAdmin.html' %}
+
+{% block title %}Site Administration{% endblock %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'addmeal' %}">ADD MEAL</a></li>
+        <li><a href="{% url 'password_change' %}">PROFILE</a></li>
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+{% block banner %}
+<div class="jumbotron text-center">
+    <h1 style="font-size: 50px"> Site Administration</h1>
+    <p>hello {{ user }}, control everything here...</p>
+    <a role="button" class="btn btn-lg btn-success" href="#orders">Check Orders Made</a>
+    <a role="button" class="btn btn-lg btn-success" href="{% url 'viewfeedback' %}">Check feedbacks</a>
+</div>
+{%  endblock %}
+
+
+
+{% block content %}
+<div class="container-fluid">
+    <strong>Select a food product if you wish to make changes to it...</strong>
+    <h2>Food Products Available...</h2>
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-sm-4">
+        <a href="{% url 'editmeal' product.id %}" role="button" class="btn btn-danger btn-bg btn-block">
+            {{ product.meal }}<br>GHC {{product.price}}
+        </a><br>
+    </div>
+    {% endfor %}
+    {% else %}
+    <strong>No Food Products currently...</strong>
+    {% endif %}
+</div>
+
+
+<div class="container-fluid bg-grey" id="orders">
+    <h2>Orders Made....</h2>
+    <div class="container">
+        <div class="row">
+            {% if all_orders %}
+            {% for order in all_orders %}
+            <div class="well btn btn-block">
+                <strong>Food : {{ order.meal }}<br>Quantity : {{ order.quantity }}</strong>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h3>No orders made at the moment...</h3>
+            {% endif %}
+        </div>
+        <div class="text-center">
+            <strong>Click the button below to download a CSV orders file </strong>
+            <a role="button" class="btn btn-success" href="{% url 'reportDownload' %}">Download CSV file</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

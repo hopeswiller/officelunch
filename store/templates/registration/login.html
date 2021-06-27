@@ -1,0 +1,55 @@
+﻿{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'index' %}">HOME</a></li>
+                <li><a href="{% url 'register' %}">REGISTER</a></li>
+                <li class="active"><a href="{% url 'loginView' %}">LOGIN</a></li>
+                <li><a href="{% url 'AdminLogin' %}">ADMIN</a></li>
+        </ul>
+</div>{% endblock %}
+
+{% block content %}
+<div class="container-fluid bg-grey ">
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">Your email address and password didn't match.
+                Please try again.</div>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+
+    <h2 class="text-center">LOGIN</h2>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <!-- {{form | crispy}} -->
+                    <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" id="email" name="email" type="email" placeholder="email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" placeholder="Password" />
+                </div>
+                    <input class="form-control btn btn-success" name="submit" type="submit" value="Log in" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

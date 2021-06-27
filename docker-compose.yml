@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  lunch:
+    image: lunch
+    container_name: lunch
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8000:8000

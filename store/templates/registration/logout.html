@@ -1,0 +1,35 @@
+{% extends "baseAdmin.html" %}
+
+{% block title %}Admin Logout{% endblock %}
+
+
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'AdminLogin' %}">LOGIN</a></li>
+        </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+{% block banner %}
+{%  endblock %}
+
+
+{% block content %}
+<div class="container-fluid bg-grey">
+        <div class="container text-center">
+                <h2> you have been Logged out from your view</h2>
+                <div class="panel-body lead">
+                        <a href="{% url 'AdminLogin' %}">Click here to login again.</a><br><br>
+                        <a href="{% url 'index' %}">Go Back to homepage.</a>
+                </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

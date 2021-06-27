@@ -1,0 +1,66 @@
+{% extends "baseAdmin.html" %}
+
+{% block title %}Feedbacks | Admin{% endblock %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminsite' %}">BACK</a></li>
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+{% block banner %}
+
+<div class="container-fluid">
+    <div class="page-header text-center">
+        <h1 style="font-size: 25px"> Feedbacks Provided from Registered Employees </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% if all_feedbacks %}
+
+            <div class="col-sm-12">
+                <div class="container-fluid bg-grey page-header">
+
+                    {% for feedback in all_feedbacks %}
+                    <p><strong>{{ feedback.EmployeeFirstname }}'s feedback on {{ feedback.DateSent }}</strong></p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Employee Department</th>
+                                <th>Feeback on Product</th>
+                                <th>Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{ feedback.EmployeeFirstname}}</th>
+                                <th>{{feedback.EmployeeDepartment}}</th>
+                                <th>{{feedback.Product}}</th>
+                                <th>{{feedback.Content}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br><hr>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% else %}
+            <h3>no products</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

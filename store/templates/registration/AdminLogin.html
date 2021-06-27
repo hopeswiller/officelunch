@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Admin{% endblock %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'register' %}">REGISTER</a></li>
+        <li><a href="{% url 'loginView' %}">LOGIN</a></li>
+        <li class="active"><a href="{% url 'AdminLogin' %}">ADMIN</a></li>
+    </ul>
+</div>{% endblock %}
+
+<!-- {% load crispy_forms_tags %} -->
+
+{% block content %}
+<div class="container-fluid bg-grey ">
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">Your username and password didn't match.
+                Please try again.</div>
+            {% endif %}
+
+            {% if next %}
+            {% if user.is_authenticated %}
+            <div class="alert alert-warning" role="alert">
+                Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.
+            </div>
+            {% else %}
+            <div class="alert alert-warning" role="alert">Please login to see this page.</div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <h2 class="text-center">ADMIN LOGIN</h2>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form method="post" action="">
+                {% csrf_token %}
+                <!----{{ form|crispy }}
+                --<input class="form-control btn btn-success" name="submit" type="submit" value="Log in" /> -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input class="form-control" id="username" name="username" type="text" placeholder="Username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control btn btn-success" name="submit" type="submit" value="Log in" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

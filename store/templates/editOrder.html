@@ -1,0 +1,51 @@
+{% extends "dashboard_base.html" %}
+
+
+{% load crispy_forms_tags %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'order' %}">ADD ORDER</a></li>
+        <li><a href="#">MANAGE DETAILS</a></li>
+        <li><a href="#">LOGOUT</a></li>
+    </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+
+{% block banner %}
+
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="page-header">
+                <h1>Change the details of an order and save</h1>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="jumbotron">
+    <div class="row justify-content-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="form-group">
+               {{form|crispy}}
+                <div class="form-group">
+                    <button class="form-control btn btn-success" name="submit" type="submit">Save
+                        Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

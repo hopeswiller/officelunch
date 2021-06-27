@@ -1,0 +1,53 @@
+﻿{% extends "dashboard_base.html" %}
+
+{% block title %}Dashboard | Office Lunch{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid bg-grey">
+
+  <div class="row">
+    {% if all_products %}
+    {% for product in all_products %}
+    <div class="col-sm-4">
+      <p class="text-center"><strong>{{ product.meal }}</strong></p>
+      <a role="button" class="btn btn-danger btn-bg  btn-block" title="Price of Meal per Quantity" data-toggle="popover"
+        data-placement="top" data-content="GHC {{product.price}} ">{{ product.meal }}
+      </a><br>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3>no products</h3>
+    {% endif %}
+  </div>
+</div>
+
+
+
+<div class="container">
+  <h2>Orders Made....</h2>
+  <div class="row">
+    {% if all_orders %}
+    {% for order in all_orders %}
+    <strong>Order No#{{order.id}} at {{order.last_change}}</strong>
+    <div class="well btn btn-block">
+        <strong>Food : {{ order.meal }}<br>Quantity : {{ order.quantity }}<br>Description / Comment :
+          {{ order.comments }}</strong>
+    </div>  
+    {% endfor %}
+    {% else %}
+    <h3>no orders yet</h3>
+    {% endif %}
+  </div>
+  <a role="button" class="btn btn-primary form-control" href="{% url 'EditOrderPage' %}">Edit an Order</a>
+</div>
+
+
+<script>
+  $(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+  });
+
+</script>
+{% endblock %}

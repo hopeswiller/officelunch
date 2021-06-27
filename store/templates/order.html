@@ -1,0 +1,72 @@
+﻿{% extends "dashboard_base.html" %}
+
+
+
+
+{% block banner %}
+
+<div class="container-fluid">
+      <div class="row text-center">
+            <h1 style="font-size: 25px"> Select the food product you want to order and enter the quantity you wish to order</h1>
+      </div>
+</div>
+
+<div class="container-fluid bg-grey">
+      <div class="row">
+            {% if list %}
+            {% for product in list %}
+            <div class="col-sm-4">
+                  <p class="text-center"><strong>{{ product.meal }}</strong></p>
+                  <button class="btn btn-danger btn-bg  btn-block" type="button">{{ product.meal }}
+                  </button><br>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h3>no products</h3>
+            {% endif %}
+      </div>
+</div>
+
+<div class="jumbotron">
+      <div class="row justify-content-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                  <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                              <label for="meal">Meal</label>
+                              <input class="form-control" id="meal" name="meal" type="text" required />
+                        </div>
+                        <div class="form-group">
+                              <label for="email">Email</label>
+                              <input class="form-control" id="email" name="email" type="email" required />
+                        </div>
+                        <div class="form-group">
+                              <label for="quantity">Quantity</label>
+                              <input class="form-control" id="quantity" name="quantity" required />
+                        </div>
+                        <div class="form-group">
+                              <label for="comments">Comments</label>
+                              <textarea class="form-control" id="comments" name="comments" rows="10" placeholder="how do you want the order" required ></textarea>
+                        </div>
+                        <div class="form-group">
+                              <button class="form-control btn btn-success" name="submit" type="submit">Add
+                                    Order</button>
+                        </div>
+                  </form>
+            </div>
+      </div>
+</div>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+            $('button[type="button"').click(function () {
+                  var text = $(this).text();
+                  $('input[type="text"').val(text);
+            });
+      });
+</script>
+
+{% endblock %}
+
+

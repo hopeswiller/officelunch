@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html' %}
+
+{% block nav %}
+<div class="collapse navbar-collapse" id="myNavbar">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+    </ul>
+</div>
+</div>
+</nav>
+{% endblock %}
+
+
+{% block banner %}
+<div class="container-fluid">
+    <div class="row text-center">
+        <h2> Add a food Product </h2><hr>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    {{ form.as_p }}<hr>
+                    <button type="submit" class="btn-success btn">Save Product</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
